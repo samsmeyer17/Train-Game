@@ -127,11 +127,14 @@
 
       var trainName = $("#train-name-input").val().trim();
       var trainDestination = $("#destination-input").val().trim();
-      var firstTime = ;
+      var firstTime = $("#first-train-input").val().trim();
+      var firstTimeConvert = moment(firstTime, "HH:mm");
       var frequency = $("#frequency-input").val().trim();
       var currentTime = moment();
-      var nextTime = firstTime + frequency;
-      var wait = moment(nextTime).subtract(currentTime, "HH:mm");
+      var nextTime = firstTimeConvert + frequency;
+      var nextTimeConvert = moment(nextTime, "HH:mm");
+
+      console.log(firstTimeConvert);
 
       var newTrain = {
         name: trainName,
