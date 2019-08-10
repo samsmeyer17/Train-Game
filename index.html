@@ -80,11 +80,11 @@
               </div>
               <div class="form-group">
                 <label for="first-train-input">First Train Time(HH:mm - military time)</label>
-                <input class="form-control" id="first-train-input" placeholder="08/07/1996" type="text">
+                <input class="form-control" id="first-train-input" placeholder="14:30" type="number">
               </div>
               <div class="form-group">
                 <label for="frequency-input">Frequency (mm)</label>
-                <input class="form-control" id="frequency-input" placeholder="30" type="text">
+                <input class="form-control" id="frequency-input" placeholder="30" type="number">
               </div>
               <button class="btn btn-primary float-right" id="add-train-btn">Submit</button>
             </form>
@@ -124,33 +124,55 @@
     // button for adding trains to the train schedule
     $("#add-train-btn").on("click", function(event) {
       event.preventDefault();
-
-      var trainName = $("#train-name-input").val().trim();
-      var trainDestination = $("#destination-input").val().trim();
-      var firstTime = $("#first-train-input").val().trim();
-      var firstTimeConvert = moment(firstTime, "HH:mm");
-      var frequency = $("#frequency-input").val().trim();
-      var currentTime = moment();
-      var nextTime = firstTimeConvert + frequency;
-      var nextTimeConvert = moment(nextTime, "HH:mm");
-
-      console.log(firstTimeConvert);
-
-      var newTrain = {
-        name: trainName,
-        destination: trainDestination,
-        firstTime: firstTime,
-        frequency: frequency,
-        nextTime: nextTime,
-      };
-
-      database.ref().push(newTrain);
       
-      console.log(newTrain.name);
-      console.log(newTrain.destination);
-      console.log(newTrain.firstTime);
-      console.log(newTrain.frequency);
-      console.log(newTrain.nextTime);
+      
+      // variable that is set equal to the value of the train-name input box
+      var trainName = $("#train-name-input").val().trim();
+      console.log(trainName);
+      
+      // variable that is set equal to the value of the destination input box
+      var trainDestination = $("#destination-input").val().trim();
+      console.log(trainDestination);
+
+
+      // variable that is set equal to the value of the first train time input box
+      var firstTime = $("#first-train-input").val().trim();
+      console.log(firstTime)
+      
+      // the frequency inputed by the user
+      var frequency = $("#frequency-input").val().trim();
+      console.log(frequency);
+      
+      // the current time
+      var currentTime = moment();
+      console.log("Current Time: " + moment(currentTime).format("hh:mm"));
+
+      // difference in the two times
+      var diffTime = moment().diff(moment((firstTime), "mm"));
+      console.log("DIFFERENCE IN TIME: " + diffTime)
+      
+      // the amount of time between trains
+      var remainder = diffTime % frequency;
+      console.log(remainder);
+
+      var minutesUntillTrain = frequency - remainder;
+      console.log("MINUTES TILL TRAIN: " + minutesUntillTrain)
+
+      // var newTrain = {
+      //   name: trainName,
+      //   destination: trainDestination,
+      //   firstTime: firstTime,
+      //   frequency: frequency,
+      //   nextTime: nextTime,
+      //   currentTime: currentTime
+      // };
+
+      // database.ref().push(newTrain);
+      
+      // console.log(newTrain.name);
+      // console.log(newTrain.destination);
+      // console.log(newTrain.firstTime);
+      // console.log(newTrain.frequency);
     });
   </script>
 </body>
