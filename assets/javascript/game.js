@@ -1,18 +1,18 @@
 // Your web app's Firebase configuration
-var config = {
-  apiKey: "AIzaSyAVsTh-a8XkebmRd_6Lq7g0oQcBjd66fTA",
-  authDomain: "train-game-44ffb.firebaseapp.com",
-  databaseURL: "https://train-game-44ffb.firebaseio.com",
-  projectId: "train-game-44ffb",
-  storageBucket: "",
-  messagingSenderId: "1002607826901",
-  appId: "1:1002607826901:web:e801eaba471c4788"
-};
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAVsTh-a8XkebmRd_6Lq7g0oQcBjd66fTA",
+    authDomain: "train-game-44ffb.firebaseapp.com",
+    databaseURL: "https://train-game-44ffb.firebaseio.com",
+    projectId: "train-game-44ffb",
+    storageBucket: "train-game-44ffb.appspot.com",
+    messagingSenderId: "1002607826901",
+    appId: "1:1002607826901:web:e801eaba471c4788"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 
-
-firebase.initializeApp(config);
-
-var trainData = firebase.database();
+  var trainData = firebase.database();
 
 // 2. Populate Firebase Database with initial data (in this case, I did this via Firebase GUI)
 // 3. Button for adding trains
