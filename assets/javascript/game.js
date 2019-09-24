@@ -1,5 +1,4 @@
-// Your web app's Firebase configuration
-  // Your web app's Firebase configuration
+
   var firebaseConfig = {
     apiKey: "AIzaSyAVsTh-a8XkebmRd_6Lq7g0oQcBjd66fTA",
     authDomain: "train-game-44ffb.firebaseapp.com",
@@ -9,18 +8,15 @@
     messagingSenderId: "1002607826901",
     appId: "1:1002607826901:web:e801eaba471c4788"
   };
-  // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
   var trainData = firebase.database();
-
-// 2. Populate Firebase Database with initial data (in this case, I did this via Firebase GUI)
-// 3. Button for adding trains
+  
 $("#add-train-btn").on("click", function (event) {
-  // Prevent the default form submit behavior
+  
   event.preventDefault();
 
-  // Grabs user input
+  
   var trainName = $("#train-name-input")
     .val()
     .trim();
@@ -34,7 +30,6 @@ $("#add-train-btn").on("click", function (event) {
     .val()
     .trim();
 
-  // Creates local "temporary" object for holding train data
   var newTrain = {
     name: trainName,
     destination: destination,
@@ -42,16 +37,13 @@ $("#add-train-btn").on("click", function (event) {
     frequency: frequency
   };
 
-  // Uploads train data to the database
   trainData.ref().push(newTrain);
 
-  // Logs everything to console
   console.log(newTrain.name);
   console.log(newTrain.destination);
   console.log(newTrain.firstTrain);
   console.log(newTrain.frequency);
 
-  // Alert
   alert("Train successfully added");
 
   // Clears all of the text-boxes
@@ -61,11 +53,10 @@ $("#add-train-btn").on("click", function (event) {
   $("#frequency-input").val("");
 });
 
-// 4. Create Firebase event for adding trains to the database and a row in the html when a user adds an entry
+
 trainData.ref().on("child_added", function (childSnapshot, prevChildKey) {
   console.log(childSnapshot.val());
 
-  // Store everything into a variable.
   var tName = childSnapshot.val().name;
   var tDestination = childSnapshot.val().destination;
   var tFrequency = childSnapshot.val().frequency;
@@ -79,26 +70,20 @@ trainData.ref().on("child_added", function (childSnapshot, prevChildKey) {
   var tMinutes;
   var tArrival;
 
-  // If the first train is later than the current time, sent arrival to the first train time
   if (maxMoment === trainTime) {
     tArrival = trainTime.format("hh:mm A");
     tMinutes = trainTime.diff(moment(), "minutes");
   } else {
-    // Calculate the minutes until arrival using hardcore math
-    // To calculate the minutes till arrival, take the current time in unix subtract the FirstTrain time
-    // and find the modulus between the difference and the frequency.
     var differenceTimes = moment().diff(trainTime, "minutes");
     var tRemainder = differenceTimes % tFrequency;
     tMinutes = tFrequency - tRemainder;
-    // To calculate the arrival time, add the tMinutes to the current time
     tArrival = moment()
       .add(tMinutes, "m")
       .format("hh:mm A");
   }
   console.log("tMinutes:", tMinutes);
   console.log("tArrival:", tArrival);
-
-  // Add each train's data into the table
+  
   $("#train-table > tbody").append(
     $("<tr>").append(
       $("<td>").text(tName),
