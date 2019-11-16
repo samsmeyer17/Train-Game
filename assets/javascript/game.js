@@ -19,10 +19,11 @@
     appId: "1:746252464557:web:57a31c12da45d58d84b124",
     measurementId: "G-PB275PNE5J"
   };
-  {/* // Initialize Firebase */}
-  firebase.initializeApp(firebaseConfig);
+  // initialize firebase
+  firebase.initializeApp(config);
   firebase.analytics();
 
+  var trainData = firebase.database()
 
 // 2. Populate Firebase Database with initial data (in this case, I did this via Firebase GUI)
 // 3. Button for adding trains
