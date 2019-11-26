@@ -1,13 +1,3 @@
-// Steps to complete:
-
-// 1. Create Firebase link
-// 2. Create initial train data in database
-// 3. Create button for adding new trains - then update the html + update the database
-// 4. Create a way to retrieve trains from the trainlist.
-// 5. Create a way to calculate the time way. Using difference between start and current time.
-//    Then take the difference and modulus by frequency. (This step can be completed in either 3 or 4)
-
-
   // firebase config
   var config = {
     apiKey: "AIzaSyABrccUzddqA5RO4N_4mxSfdM5NV5c1Vrg",
@@ -55,14 +45,8 @@ $("#add-train-btn").on("click", function(event) {
   // Uploads train data to the database
   trainData.ref().push(newTrain);
 
-  // Logs everything to console
-  console.log(newTrain.name);
-  console.log(newTrain.destination);
-  console.log(newTrain.firstTrain);
-  console.log(newTrain.frequency);
-
   // Alert
-  alert("Train successfully added");
+  alert("You added a train! Nice!");
 
   // Clears all of the text-boxes
   $("#train-name-input").val("");
@@ -119,35 +103,3 @@ trainData.ref().on("child_added", function(childSnapshot, prevChildKey) {
     )
   );
 });
-
-// Assume the following situations.
-
-// (TEST 1)
-// First Train of the Day is 3:00 AM
-// Assume Train comes every 3 minutes.
-// Assume the current time is 3:16 AM....
-// What time would the next train be...? ( Let's use our brains first)
-// It would be 3:18 -- 2 minutes away
-
-// (TEST 2)
-// First Train of the Day is 3:00 AM
-// Assume Train comes every 7 minutes.
-// Assume the current time is 3:16 AM....
-// What time would the next train be...? (Let's use our brains first)
-// It would be 3:21 -- 5 minutes away
-
-// ==========================================================
-
-// Solved Mathematically
-// Test case 1:
-// 16 - 00 = 16
-// 16 % 3 = 1 (Modulus is the remainder)
-// 3 - 1 = 2 minutes away
-// 2 + 3:16 = 3:18
-
-// Solved Mathematically
-// Test case 2:
-// 16 - 00 = 16
-// 16 % 7 = 2 (Modulus is the remainder)
-// 7 - 2 = 5 minutes away
-// 5 + 3:16 = 3:21
