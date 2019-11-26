@@ -9,7 +9,7 @@
 
 
   // firebase config
-  var firebaseConfig = {
+  var config = {
     apiKey: "AIzaSyABrccUzddqA5RO4N_4mxSfdM5NV5c1Vrg",
     authDomain: "train-scheduler-840ed.firebaseapp.com",
     databaseURL: "https://train-scheduler-840ed.firebaseio.com",
@@ -21,9 +21,8 @@
   };
   // initialize firebase
   firebase.initializeApp(config);
-  firebase.analytics();
 
-  var trainData = firebase.database()
+  var trainData = firebase.database();
 
 // 2. Populate Firebase Database with initial data (in this case, I did this via Firebase GUI)
 // 3. Button for adding trains
